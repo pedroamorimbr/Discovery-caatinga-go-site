@@ -3,7 +3,7 @@ const MAX_USER_MESSAGE_LENGTH = 1200;
 const MAX_CONTEXT_LENGTH = 12000;
 const MAX_REQUEST_BYTES = 50000;
 const MAX_REPLY_LENGTH = 5000;
-const SYSTEM_PROMPT = "Você é CaatIA, a assistente educativa do Discovery Caatinga Go. Responda em português brasileiro, com clareza e cordialidade, priorizando informações corretas sobre a Caatinga, biodiversidade e conservação. Se não souber algo, diga isso claramente. Não invente fontes, dados ou certezas. Suas respostas são educativas e não substituem orientação profissional.";
+const SYSTEM_PROMPT = "Você é CaatIA, a assistente educativa do Discovery Caatinga Go. Responda em português brasileiro, com clareza e cordialidade, priorizando informações corretas sobre a Caatinga, biodiversidade e conservação. Use texto simples, sem Markdown, sem asteriscos para negrito ou itálico, sem cerquilhas para títulos e sem crases. Se não souber algo, diga isso claramente. Não invente fontes, dados ou certezas. Suas respostas são educativas e não substituem orientação profissional.";
 
 function sendJson(res, status, body) {
   res.status(status).setHeader("Content-Type", "application/json; charset=utf-8");
@@ -21,6 +21,19 @@ function getProviderError(status) {
     429: "O OpenRouter recebeu muitas solicitações. Aguarde um pouco e tente novamente."
   };
   return messages[status] || "O OpenRouter está temporariamente indisponível. Tente novamente mais tarde.";
+}
+
+function removeMarkdownFormatting(text) {
+  return text
+    .replace(/\*\*/g, "")
+    .replace(/\*([^*\n]+)\*/g, "$1")
+    .replace(/^\s*\*\s+/gm, "• ")
+    .replace(/__/g, "")
+    .replace(/_([^_\n]+)_/g, "$1")
+    .replace(/~~/g, "")
+    .replace(/`{1,3}/g, "")
+    .replace(/^#{1,6}\s+/gm, "")
+    .trim();
 }
 
 function getMessages(body) {
@@ -110,12 +123,14 @@ module.exports = async function handler(req, res) {
       return sendJson(res, 502, { error: "O serviço de IA retornou uma resposta inválida." });
     }
 
-    const reply = result?.choices?.[0]?.message?.content;
-    if (typeof reply !== "string" || !reply.trim() || reply.length > MAX_REPLY_LENGTH) {
+    const rawReply = result?.choices?.[0]?.message?.content;
+    if (typeof rawReply !== "string" || !rawReply.trim() || rawReply.length > MAX_REPLY_LENGTH) {
       console.error("A resposta do provedor de IA está vazia ou fora do limite.");
       return sendJson(res, 502, { error: "O serviço de IA retornou uma resposta inválida." });
     }
-    return sendJson(res, 200, { reply: reply.trim() });
+    const reply = removeMarkdownFormatting(rawReply);
+    if (!reply) return sendJson(res, 502, { error: "O serviço de IA retornou uma resposta inválida." });
+    return sendJson(res, 200, { reply });
   } catch (error) {
     console.error("Falha na chamada ao provedor de IA:", error instanceof Error ? error.message : "erro desconhecido");
     return sendJson(res, 502, { error: "Não foi possível conectar ao serviço de IA. Tente novamente." });
