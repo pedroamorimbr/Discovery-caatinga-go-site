@@ -11,6 +11,18 @@ function sendJson(res, status, body) {
   return res.json(body);
 }
 
+function getProviderError(status) {
+  const messages = {
+    400: "O OpenRouter rejeitou o modelo ou o formato da solicitação. Confira AI_MODEL e se o modelo aceita chat.",
+    401: "A chave AI_API_KEY foi recusada. Confira se ela é uma chave válida do OpenRouter.",
+    402: "A conta do OpenRouter está sem créditos ou atingiu o limite de gastos.",
+    403: "O acesso foi bloqueado pelo OpenRouter. Confira os limites e as permissões da chave.",
+    404: "O modelo configurado em AI_MODEL não foi encontrado ou não está disponível.",
+    429: "O OpenRouter recebeu muitas solicitações. Aguarde um pouco e tente novamente."
+  };
+  return messages[status] || "O OpenRouter está temporariamente indisponível. Tente novamente mais tarde.";
+}
+
 function getMessages(body) {
   if (!body || typeof body !== "object" || !Array.isArray(body.messages)) return null;
   if (body.messages.length < 1 || body.messages.length > MAX_MESSAGES) return null;
@@ -87,7 +99,7 @@ module.exports = async function handler(req, res) {
 
     if (!upstream.ok) {
       console.error(`O provedor de IA respondeu com HTTP ${upstream.status}.`);
-      return sendJson(res, 502, { error: "O serviço de IA não conseguiu responder. Verifique a configuração do provedor." });
+      return sendJson(res, 502, { error: getProviderError(upstream.status) });
     }
 
     let result;
