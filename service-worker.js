@@ -6,7 +6,7 @@ const APP_SHELL = [
   "./style.css",
   "./memory-game.css",
   "./discovery-day.css",
-  "./premium.css",
+  "./premium.css?v=download-badge-1",
   "./snake-io.css",
   "./ai-chat.css",
   "./script.js",
