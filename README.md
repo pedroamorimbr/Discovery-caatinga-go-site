@@ -32,7 +32,7 @@ Todos os caminhos locais no HTML e no JavaScript são relativos a esta pasta.
 
 O nome e o formato do modelo e do endpoint dependem do provedor. Use um serviço compatível com Chat Completions e configure o endpoint completo em `AI_API_URL`; não coloque a chave no HTML, JavaScript, GitHub ou em mensagens públicas. Se a chave já tiver sido compartilhada, revogue-a e crie outra. Para desenvolvimento local, copie `.env.example` para `.env.local`, preencha os valores e use a Vercel CLI (`vercel dev`).
 
-O endpoint limita cada pergunta a 1.200 caracteres, aceita até oito mensagens de contexto e define um limite de resposta. Como a rota é pública, configure também limites de uso e monitoramento do provedor/Vercel antes de divulgar amplamente o site; esses controles variam conforme o plano e o provedor.
+O endpoint limita cada pergunta a 1.200 caracteres, aceita até oito mensagens de contexto e define um limite de resposta. Antes de gerar uma resposta, a IA classifica se a pergunta está relacionada ao site ou ao bioma Caatinga; solicitações fora do tema recebem uma recusa educada, e esse contexto não é enviado nas perguntas seguintes. A classificação é feita pelo próprio modelo e ajuda a orientar o comportamento, mas não é um filtro determinístico. Como a rota é pública e cada pergunta dentro do escopo gera uma chamada de classificação e outra de resposta, configure também limites de uso e monitoramento do provedor/Vercel antes de divulgar amplamente o site; esses controles variam conforme o plano e o provedor.
 
 ## Jogos
 - Jogo da memória: encontre os oito pares de espécies.

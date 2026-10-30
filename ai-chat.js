@@ -62,6 +62,12 @@
     throw new Error(result?.error||"Não foi possível obter uma resposta agora. Tente novamente.");
    }
    if(typeof result?.reply!=="string"||!result.reply.trim())throw new Error("A IA retornou uma resposta vazia. Tente novamente.");
+   if(result.inScope===false){
+    conversation.length=0;
+    addMessage("assistant",result.reply);
+    statusElement.textContent="";
+    return;
+   }
    conversation.push({role:"assistant",content:result.reply});
    addMessage("assistant",result.reply);
    statusElement.textContent="";
