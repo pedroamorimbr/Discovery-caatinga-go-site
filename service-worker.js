@@ -1,4 +1,4 @@
-const CACHE_NAME = "discovery-caatinga-offline-v7";
+const CACHE_NAME = "discovery-caatinga-offline-v8";
 const APP_SHELL = [
   "./",
   "./index.html",
