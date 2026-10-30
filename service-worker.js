@@ -1,4 +1,4 @@
-const CACHE_NAME = "discovery-caatinga-offline-v5";
+const CACHE_NAME = "discovery-caatinga-offline-v6";
 const APP_SHELL = [
   "./",
   "./index.html",
@@ -8,8 +8,10 @@ const APP_SHELL = [
   "./discovery-day.css",
   "./premium.css",
   "./snake-io.css",
+  "./ai-chat.css",
   "./script.js",
   "./snake-io.js",
+  "./ai-chat.js",
   "./logo.png",
   "./pwa-icon-512.png",
   "./acaua.jpg",

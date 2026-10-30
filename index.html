@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="discovery-day.css">
 <link rel="stylesheet" href="premium.css">
 <link rel="stylesheet" href="snake-io.css">
+<link rel="stylesheet" href="ai-chat.css">
 <style>
 .site-header{padding-inline:clamp(20px,4vw,64px);gap:18px}
 .main-nav{flex:1;justify-content:flex-end;gap:7px;font-size:10px}
@@ -299,12 +300,35 @@
 <section class="closing-cta section-wrap reveal"><div class="closing-ornament">✳</div><div class="eyebrow">A CAATINGA TEM MUITO A REVELAR</div><h2>Sua próxima descoberta<br><em>começa agora.</em></h2><p>Conheça, valorize e preserve a riqueza de um bioma que faz parte da nossa história.</p><a class="button button-light" href="#inicio">Voltar ao início <span>↑</span></a><div class="closing-line">DISCOVERY CAATINGA GO <span>—</span> CONHEÇA · VALORIZE · PRESERVE</div></section>
 </main>
 
+<aside class="ai-chat" aria-label="Assistente de inteligência artificial">
+  <section class="ai-chat-panel" id="aiChatPanel" aria-labelledby="aiChatTitle" hidden>
+    <header class="ai-chat-header">
+      <div><span class="ai-chat-eyebrow">DISCOVERY CAATINGA GO</span><h2 id="aiChatTitle">Assistente da Caatinga</h2></div>
+      <button class="ai-chat-close" id="aiChatClose" type="button" aria-label="Fechar conversa">×</button>
+    </header>
+    <p class="ai-chat-disclaimer">Tire dúvidas sobre a Caatinga. As respostas são geradas por IA e podem conter imprecisões.</p>
+    <div class="ai-chat-messages" id="aiChatMessages" role="log" aria-live="polite" aria-relevant="additions">
+      <p class="ai-chat-message ai-chat-assistant">Olá! Posso ajudar você a descobrir mais sobre a Caatinga. O que gostaria de saber?</p>
+    </div>
+    <p class="ai-chat-status" id="aiChatStatus" role="status" aria-live="polite"></p>
+    <form class="ai-chat-form" id="aiChatForm">
+      <label class="ai-chat-sr-only" for="aiChatInput">Sua pergunta</label>
+      <textarea id="aiChatInput" name="message" rows="2" maxlength="1200" placeholder="Escreva sua pergunta..." required></textarea>
+      <button id="aiChatSend" type="submit">Enviar</button>
+    </form>
+  </section>
+  <button class="ai-chat-launcher" id="aiChatLauncher" type="button" aria-expanded="false" aria-controls="aiChatPanel">
+    <span aria-hidden="true">✳</span> Pergunte à IA
+  </button>
+</aside>
+
 <footer class="site-footer"><div class="footer-main"><a class="brand footer-brand" href="#inicio"><img src="logo.png" alt=""><span>DISCOVERY <b>CAATINGA GO</b></span></a><p>Conheça, valorize e preserve a Caatinga.<br>Uma experiência educativa conectada à natureza.</p><div class="footer-links"><a href="#sobre">O projeto</a><a href="#experiencia">Funcionalidades</a><a href="#especies">Biodiversidade</a><a href="#descoberta-do-dia">Descoberta do dia</a><a href="#jogo">Jogo da memória</a><a href="#desenvolvimento">Desenvolvimento</a><a href="#equipe">Equipe</a><a href="#download-app">Baixar aplicativo</a></div></div><div class="footer-bottom"><span>© <span id="year"></span> DISCOVERY CAATINGA GO</span><span>Projeto educativo • Conteúdo para fins de aprendizagem</span><a href="#top">Voltar ao topo ↑</a></div></footer>
 
-<div class="modal" id="speciesModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal-backdrop" data-close></div><div class="modal-panel"><button class="modal-close" data-close aria-label="Fechar">×</button><img id="modalImage" src="" alt=""><div class="modal-body"><span class="eyebrow dark-eyebrow" id="modalKind">ESPÉCIE</span><h2 id="modalTitle"></h2><em id="modalScientific"></em><p id="modalAbout"></p><div class="modal-disclaimer">Conteúdo introdutório. Consulte fontes especializadas para aprofundar a pesquisa.</div></div></div></div>
+<div class="modal" id="speciesModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal-backdrop" data-close></div><div class="modal-panel"><button class="modal-close" data-close aria-label="Fechar">×</button><img id="modalImage" alt=""><div class="modal-body"><span class="eyebrow dark-eyebrow" id="modalKind">ESPÉCIE</span><h2 id="modalTitle"></h2><em id="modalScientific"></em><p id="modalAbout"></p><div class="modal-disclaimer">Conteúdo introdutório. Consulte fontes especializadas para aprofundar a pesquisa.</div></div></div></div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <script src="script.js"></script>
 <script src="snake-io.js"></script>
+<script src="ai-chat.js"></script>
 <script>
 if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost" || location.hostname === "127.0.0.1")) {
   addEventListener("DOMContentLoaded", () => navigator.serviceWorker.register("service-worker.js").catch(error => console.error("Não foi possível ativar o modo offline:", error)));
