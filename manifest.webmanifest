@@ -1,0 +1,24 @@
+{
+  "id": "./",
+  "name": "Discovery Caatinga Go",
+  "short_name": "Caatinga Go",
+  "description": "Explore a biodiversidade da Caatinga e jogue offline.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#edf0e5",
+  "theme_color": "#183a2a",
+  "icons": [
+    {
+      "src": "logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "pwa-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

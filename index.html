@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#183a2a">
+<meta name="description" content="Discovery Caatinga Go — conheça, valorize e preserve a biodiversidade da Caatinga.">
+<title>Discovery Caatinga Go — Um bioma inteiro para descobrir</title>
+<link rel="icon" href="logo.png">
+<link rel="apple-touch-icon" href="logo.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="memory-game.css">
+<link rel="stylesheet" href="discovery-day.css">
+<link rel="stylesheet" href="premium.css">
+<link rel="stylesheet" href="snake-io.css">
+<style>
+.site-header{padding-inline:clamp(20px,4vw,64px);gap:18px}
+.main-nav{flex:1;justify-content:flex-end;gap:7px;font-size:10px}
+.main-nav>a:not(.nav-cta){padding:10px 12px;border:1px solid #d5dfcc;border-radius:999px;background:#fffdf7;color:#314b37;box-shadow:0 3px 9px rgba(24,58,42,.07);font-weight:800;transition:background .2s,color .2s,border-color .2s,transform .2s,box-shadow .2s}
+.main-nav>a:not(.nav-cta):hover{background:#dfe9d2;border-color:#91aa79;color:#183a2a;transform:translateY(-2px);box-shadow:0 6px 14px rgba(24,58,42,.12)}
+.main-nav .nav-cta{padding:12px 17px;white-space:nowrap;background:#183a2a;color:#fff;border:1px solid #183a2a;box-shadow:0 6px 16px rgba(24,58,42,.2);transition:transform .2s,box-shadow .2s,background .2s}
+.main-nav .nav-cta:hover{background:#244d38;color:#fff;transform:translateY(-2px);box-shadow:0 9px 21px rgba(24,58,42,.26)}
+.main-nav a:focus-visible,.menu-toggle:focus-visible{outline:3px solid #91ad71;outline-offset:3px}
+.menu-toggle{border-radius:12px;transition:background .2s}
+.menu-toggle:hover,.menu-toggle[aria-expanded="true"]{background:#edf1e5}
+.team-social{font-size:12px}
+@media(max-width:1100px){.site-header{padding-inline:5.5vw}.menu-toggle{display:flex;flex-direction:column;gap:5px;padding:10px}.menu-toggle span{display:block;width:23px;height:2px;background:var(--forest);transition:.2s}.main-nav{display:none;position:absolute;top:69px;left:0;right:0;flex:initial;justify-content:initial;align-items:stretch;flex-direction:column;gap:7px;padding:20px 6% 25px;background:var(--cream);box-shadow:0 20px 25px #1a3b2412}.main-nav.open{display:flex}.main-nav>a:not(.nav-cta){padding:13px 15px;border:1px solid #d5dfcc;border-radius:12px;background:#fffdf7;box-shadow:0 3px 9px rgba(24,58,42,.07)}.main-nav>a[href="#jogo"],.main-nav>a[href="#descoberta-do-dia"]{color:#183a2a;background:#d7e2a7;border-color:#b9cc8d}.main-nav>a:not(.nav-cta):hover{transform:none;background:#dfe9d2}.main-nav .nav-cta{margin-top:6px;text-align:center;border:0;padding:14px;box-shadow:0 6px 16px rgba(24,58,42,.2)}.main-nav .nav-cta:hover{transform:none}}
+@media(max-width:1100px){
+ .main-nav>a:not(.nav-cta){padding:13px 15px;border:1px solid #d5dfcc;border-radius:12px;background:#fffdf7;color:#314b37;box-shadow:0 3px 9px rgba(24,58,42,.07);transform:none}
+ .main-nav>a[href="#jogo"],.main-nav>a[href="#descoberta-do-dia"]{background:#fffdf7;border-color:#d5dfcc;color:#314b37;box-shadow:0 3px 9px rgba(24,58,42,.07)}
+ .main-nav>a:not(.nav-cta):hover{background:#edf1e5;border-color:#b8c9a5;color:#183a2a;box-shadow:0 4px 11px rgba(24,58,42,.09);transform:none}
+ .main-nav>a[href="#jogo"]:hover,.main-nav>a[href="#descoberta-do-dia"]:hover{background:#edf1e5;border-color:#b8c9a5;color:#183a2a;box-shadow:0 4px 11px rgba(24,58,42,.09)}
+ html[data-theme="dark"] .main-nav>a:not(.nav-cta){border-color:#364b36;background:#26372a;color:#e3ebe0;box-shadow:none}
+ html[data-theme="dark"] .main-nav>a[href="#jogo"],html[data-theme="dark"] .main-nav>a[href="#descoberta-do-dia"]{border-color:#364b36;background:#26372a;color:#e3ebe0;box-shadow:none}
+ html[data-theme="dark"] .main-nav>a:not(.nav-cta):hover{border-color:#526647;background:#304332;color:#f0f5eb;box-shadow:none}
+ html[data-theme="dark"] .main-nav>a[href="#jogo"]:hover,html[data-theme="dark"] .main-nav>a[href="#descoberta-do-dia"]:hover{border-color:#526647;background:#304332;color:#f0f5eb;box-shadow:none}
+}
+</style>
+</head>
+<body>
+<div class="progress-line" id="progressLine"></div>
+<a class="skip-link" href="#main-content">Pular para o conteúdo principal</a>
+<details class="accessibility-widget">
+  <summary aria-label="Abrir opções de acessibilidade"><span aria-hidden="true">◉</span> Acessibilidade</summary>
+  <div class="accessibility-panel" role="group" aria-label="Opções de acessibilidade">
+    <strong>Personalize sua leitura</strong>
+    <div class="accessibility-text-controls" role="group" aria-label="Tamanho do texto">
+      <button type="button" id="textSmaller" aria-label="Diminuir texto">A−</button>
+      <span id="textSizeLabel" aria-live="polite">Texto padrão</span>
+      <button type="button" id="textLarger" aria-label="Aumentar texto">A+</button>
+      <button type="button" id="textReset" aria-label="Restaurar tamanho padrão">Padrão</button>
+    </div>
+    <button type="button" class="theme-toggle" id="themeToggle" aria-label="Ativar tema escuro" aria-pressed="false"><span class="theme-toggle-icon" aria-hidden="true">☾</span><span class="theme-toggle-label">Tema escuro</span></button>
+    <button type="button" class="contrast-toggle" id="contrastToggle" aria-pressed="false">Ativar alto contraste</button>
+    <div class="accessibility-voice" role="group" aria-label="Leitura em voz alta">
+      <strong>Leitura em voz alta</strong>
+      <div>
+        <button type="button" id="readPage" aria-label="Ler o conteúdo principal em voz alta">▶ Ler conteúdo</button>
+        <button type="button" id="stopReading" aria-label="Parar leitura em voz alta" disabled>■ Parar</button>
+      </div>
+      <span id="voiceStatus" role="status" aria-live="polite">A leitura usa a voz disponível no seu navegador.</span>
+    </div>
+  </div>
+</details>
+<header class="site-header" id="top">
+  <a class="brand" href="#inicio" aria-label="Discovery Caatinga Go, início"><span class="brand-cube-scene" aria-hidden="true"><span class="brand-cube"><img class="brand-cube-face brand-cube-front" src="logo.png" alt=""><img class="brand-cube-face brand-cube-back" src="logo.png" alt=""><img class="brand-cube-face brand-cube-right" src="logo.png" alt=""><img class="brand-cube-face brand-cube-left" src="logo.png" alt=""><img class="brand-cube-face brand-cube-top" src="logo.png" alt=""><img class="brand-cube-face brand-cube-bottom" src="logo.png" alt=""></span></span><span>DISCOVERY <b>CAATINGA GO</b></span></a>
+  <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu" aria-expanded="false"><span></span><span></span></button>
+  <nav class="main-nav" id="mainNav" aria-label="Navegação principal">
+    <a href="#sobre">O projeto</a><a href="#experiencia">Experiência</a><a href="#especies">Biodiversidade</a><a href="#descoberta-do-dia">Descoberta do dia</a><a href="#jogo">Jogar</a><a href="#desenvolvimento">Desenvolvimento</a><a href="#equipe">Equipe</a>
+    <a class="nav-cta" href="#download-app">Baixar aplicativo <span>↓</span></a>
+  </nav>
+</header>
+
+<main id="main-content" tabindex="-1">
+<section class="hero section-wrap" id="inicio">
+  <div class="hero-copy">
+    <div class="eyebrow"><span class="pulse-dot"></span> TECNOLOGIA A FAVOR DA NATUREZA</div>
+    <h1>Um bioma inteiro.<br><em>Mil descobertas.</em></h1>
+    <p class="hero-lead">A Caatinga tem histórias em cada espinho, asa e raiz. O <strong>Discovery Caatinga Go</strong> aproxima você desse universo com conhecimento, curiosidade e aprendizado.</p>
+    <div class="hero-actions"><a class="button button-primary" href="#experiencia">Explore o aplicativo <span>↘</span></a><a class="text-link" href="#sobre">Conheça o projeto <span>→</span></a></div>
+    <div class="hero-proof"><div class="proof-avatars"><span>🌵</span><span>🦜</span><span>🌱</span></div><div><strong>Conheça. Valorize. Preserve.</strong><small>Aprender também é cuidar.</small></div></div>
+  </div>
+  <div class="hero-art" aria-label="Vídeo introdutório do aplicativo Discovery Caatinga Go">
+    <div class="hero-video-shell">
+      <video autoplay muted loop playsinline controls preload="auto" poster="mod-intro.jpg" aria-label="Vídeo de introdução do Discovery Caatinga Go">
+        <source src="demo-app.mp4" type="video/mp4">
+        Seu navegador não suporta vídeos HTML5.
+      </video>
+      <div class="video-badge">DESCUBRA A CAATINGA</div>
+    </div>
+  </div>
+  <div class="hero-bottom"><span>DESLIZE PARA DESCOBRIR</span><div class="scroll-indicator"><i></i></div><span>01 — 06</span></div>
+</section>
+
+<section class="intro-strip" aria-label="Valores do projeto">
+  <div class="intro-strip-inner">
+    <div class="intro-strip-group"><span>CONHECIMENTO</span><b aria-hidden="true">×</b><span>TECNOLOGIA</span><b aria-hidden="true">×</b><span>CONSERVAÇÃO</span><b aria-hidden="true">×</b><span>CAATINGA</span></div>
+    <div class="intro-strip-group" aria-hidden="true"><span>CONHECIMENTO</span><b>×</b><span>TECNOLOGIA</span><b>×</b><span>CONSERVAÇÃO</span><b>×</b><span>CAATINGA</span></div>
+  </div>
+</section>
+
+<section class="impact-strip section-wrap reveal" aria-label="Resumo da experiência">
+ <article class="impact-item"><span class="impact-icon">✳</span><div><strong><span data-count="9">9</span><small> espécies</small></strong><p>Uma amostra para começar a explorar.</p></div></article>
+ <article class="impact-item"><span class="impact-icon">⌕</span><div><strong><span data-count="4">4</span><small> categorias</small></strong><p>Plantas, animais, aves e répteis.</p></div></article>
+ <article class="impact-item"><span class="impact-icon">↻</span><div><strong><span data-count="1">1</span><small> descoberta por dia</small></strong><p>Um convite para voltar e aprender.</p></div></article>
+</section>
+
+<section class="discovery-day section-wrap reveal" id="descoberta-do-dia" aria-labelledby="discoveryDayTitle">
+ <div class="discovery-day-visual">
+  <img id="discoveryDayImage" src="mandacaru.webp" alt="Espécie em destaque do dia">
+  <span class="discovery-day-stamp"><span>✳</span> DESCOBERTA DE HOJE</span>
+ </div>
+ <div class="discovery-day-copy">
+  <div class="eyebrow dark-eyebrow">UMA NOVA ESPÉCIE A CADA DIA</div>
+  <h2 id="discoveryDayTitle">Conheça a riqueza<br><em>da Caatinga.</em></h2>
+  <p class="discovery-day-kind" id="discoveryDayKind">ESPÉCIE EM DESTAQUE</p>
+  <h3 id="discoveryDayName">Mandacaru</h3>
+  <p class="discovery-day-scientific" id="discoveryDayScientific"></p>
+  <p class="discovery-day-about" id="discoveryDayAbout">Uma descoberta diferente para conhecer melhor a biodiversidade do bioma.</p>
+  <div class="discovery-day-actions">
+   <button class="button button-primary" id="discoveryDayLearn" type="button">Conhecer espécie <span>↗</span></button>
+   <a class="text-link" href="#jogo">Jogar memória <span>→</span></a>
+  </div>
+  <small class="discovery-day-date" id="discoveryDayDate"></small>
+ </div>
+</section>
+
+<section class="section section-wrap about-section" id="sobre">
+  <div class="section-heading reveal"><div><div class="eyebrow dark-eyebrow">01 / SOBRE O PROJETO</div><h2>Mais do que conhecer.<br><em>É criar conexão.</em></h2></div><p>Uma experiência educativa pensada para aproximar pessoas da biodiversidade e despertar o interesse por um dos biomas mais singulares do Brasil.</p></div>
+  <div class="about-grid">
+    <article class="about-visual reveal"><img src="mod-intro.jpg" alt="Paisagem característica da Caatinga"><div class="visual-caption"><span>BIOMA CAATINGA</span><b>Vida que se adapta.<br>Natureza que surpreende.</b></div><div class="visual-index">01 <i>—</i> TERRITÓRIO</div></article>
+    <div class="about-content reveal">
+      <div class="big-number">01<span>/</span></div><h3>O que é o Discovery Caatinga Go?</h3>
+      <p>É um aplicativo educativo que conecta tecnologia e educação ambiental. Nele, o usuário pode explorar espécies, descobrir curiosidades, estudar conteúdos e testar o que aprendeu.</p>
+      <p>A proposta é tornar o conhecimento sobre a Caatinga mais simples, acessível e interessante, valorizando a biodiversidade e incentivando sua preservação.</p>
+      <div class="purpose-card"><span class="purpose-mark">✳</span><div><small>NOSSO PROPÓSITO</small><b>Conhecer para valorizar.<br>Valorizar para preservar.</b></div></div>
+    </div>
+  </div>
+  <div class="values-row reveal"><div><span class="value-icon">⌕</span><b>Descobrir</b><p>Explore espécies e seus detalhes.</p></div><div><span class="value-icon">✧</span><b>Aprender</b><p>Transforme curiosidade em conhecimento.</p></div><div><span class="value-icon">♧</span><b>Preservar</b><p>Reconheça o valor da vida no bioma.</p></div></div>
+</section>
+
+<section class="experience-section" id="experiencia">
+  <div class="section-wrap experience-inner">
+    <div class="section-heading light-heading reveal"><div><div class="eyebrow">02 / UMA EXPERIÊNCIA DE APRENDIZAGEM</div><h2>Descubra no seu<br><em>próprio ritmo.</em></h2></div><p>Conhecimento apresentado de um jeito leve, visual e interativo. Explore os recursos e veja como cada parte pode ajudar na sua jornada.</p></div>
+    <div class="feature-tabs reveal" role="tablist" aria-label="Funcionalidades do aplicativo">
+      <button class="feature-tab active" data-feature="0" role="tab" aria-selected="true">01 <span>Explorar espécies</span><b>↗</b></button>
+      <button class="feature-tab" data-feature="1" role="tab" aria-selected="false">02 <span>Aprender e praticar</span><b>↗</b></button>
+      <button class="feature-tab" data-feature="2" role="tab" aria-selected="false">03 <span>Salvar descobertas</span><b>↗</b></button>
+    </div>
+    <div class="feature-showcase reveal">
+      <div class="feature-image" id="featureImage"><img src="mandacaru.webp" alt="Mandacaru, espécie apresentada no catálogo"><div class="image-count">01 <span>/ 03</span></div><div class="feature-sticker">EXPLORE<br><b>SEM PRESSA</b></div></div>
+      <div class="feature-copy" aria-live="polite"><div class="eyebrow">UM JEITO NOVO DE APRENDER</div><div class="feature-number" id="featureNumber">01</div><h3 id="featureTitle">Cada espécie guarda<br>uma descoberta.</h3><p id="featureText">Navegue pelo catálogo, explore categorias e encontre informações sobre plantas, animais, aves e répteis. A busca ajuda você a chegar mais rápido ao que deseja conhecer.</p><ul id="featureBullets"><li>Explore por categorias</li><li>Pesquise espécies pelo nome</li><li>Conheça características e curiosidades</li></ul><button class="round-arrow" id="nextFeature" aria-label="Próxima funcionalidade">→</button></div>
+    </div>
+    <div class="feature-dots" id="featureDots"><button class="active" aria-label="Mostrar recurso 1"></button><button aria-label="Mostrar recurso 2"></button><button aria-label="Mostrar recurso 3"></button></div>
+  </div>
+</section>
+
+<section class="section section-wrap species-section" id="especies">
+  <div class="section-heading reveal"><div><div class="eyebrow dark-eyebrow">03 / BIODIVERSIDADE EM DESTAQUE</div><h2>Pequenas descobertas.<br><em>Grandes histórias.</em></h2></div><p>Conheça algumas espécies presentes no acervo ilustrativo do aplicativo. Toque em um cartão para descobrir um pouco mais.</p></div>
+  <div class="species-tools reveal"><div class="filter-group" role="group" aria-label="Filtrar espécies"><button class="filter active" data-filter="Todas">Todas</button><button class="filter" data-filter="Plantas">Plantas</button><button class="filter" data-filter="Animais">Animais</button><button class="filter" data-filter="Aves">Aves</button><button class="filter" data-filter="Répteis">Répteis</button></div><label class="species-search"><span>⌕</span><input type="search" id="speciesSearch" placeholder="Buscar espécie..." aria-label="Buscar espécie"></label></div>
+  <div class="species-grid" id="speciesGrid">
+    <button class="species-card reveal" data-kind="Plantas" data-name="Mandacaru" data-scientific="Cereus jamacaru" data-about="Cacto icônico da Caatinga, conhecido por sua resistência e por suas flores que se abrem à noite." data-image="mandacaru.webp"><span class="species-photo"><img src="mandacaru.webp" alt="Mandacaru"><i>PLANTA</i><b>↗</b></span><span class="species-info"><small>01 / PLANTAS</small><strong>Mandacaru</strong><em>Cereus jamacaru</em></span></button>
+    <button class="species-card reveal" data-kind="Plantas" data-name="Xique-xique" data-scientific="Pilosocereus gounellei" data-about="Cacto muito resistente, associado a ambientes pedregosos e às condições do semiárido." data-image="xique-xique.jpg"><span class="species-photo"><img src="xique-xique.jpg" alt="Xique-xique"><i>PLANTA</i><b>↗</b></span><span class="species-info"><small>02 / PLANTAS</small><strong>Xique-xique</strong><em>Pilosocereus gounellei</em></span></button>
+    <button class="species-card reveal" data-kind="Plantas" data-name="Juazeiro" data-scientific="Ziziphus joazeiro" data-about="Árvore conhecida por manter sua folhagem verde durante períodos secos e oferecer sombra e alimento." data-image="juazeiro.jpg"><span class="species-photo"><img src="juazeiro.jpg" alt="Juazeiro"><i>PLANTA</i><b>↗</b></span><span class="species-info"><small>03 / PLANTAS</small><strong>Juazeiro</strong><em>Ziziphus joazeiro</em></span></button>
+    <button class="species-card reveal" data-kind="Plantas" data-name="Umbuzeiro" data-scientific="Spondias tuberosa" data-about="Árvore nativa muito ligada à cultura sertaneja. Seus frutos são apreciados e suas estruturas subterrâneas ajudam na sobrevivência em períodos secos." data-image="umbuzeiro.jpg"><span class="species-photo"><img src="umbuzeiro.jpg" alt="Umbuzeiro"><i>PLANTA</i><b>↗</b></span><span class="species-info"><small>04 / PLANTAS</small><strong>Umbuzeiro</strong><em>Spondias tuberosa</em></span></button>
+    <button class="species-card reveal" data-kind="Animais" data-name="Tatu-bola" data-scientific="Tolypeutes tricinctus" data-about="Mamífero brasileiro capaz de se enrolar como uma bola quando precisa se proteger. A espécie enfrenta ameaças como perda de habitat e caça." data-image="tatu-bola.webp"><span class="species-photo"><img src="tatu-bola.webp" alt="Tatu-bola"><i>ANIMAL</i><b>↗</b></span><span class="species-info"><small>05 / ANIMAIS</small><strong>Tatu-bola</strong><em>Tolypeutes tricinctus</em></span></button>
+    <button class="species-card reveal" data-kind="Animais" data-name="Tatu-peba" data-scientific="Euphractus sexcinctus" data-about="Tatu com hábitos de escavação, garras fortes e olfato apurado. Participa das relações ecológicas do ambiente." data-image="tatu-peba.webp"><span class="species-photo"><img src="tatu-peba.webp" alt="Tatu-peba"><i>ANIMAL</i><b>↗</b></span><span class="species-info"><small>06 / ANIMAIS</small><strong>Tatu-peba</strong><em>Euphractus sexcinctus</em></span></button>
+    <button class="species-card reveal" data-kind="Aves" data-name="Carcará" data-scientific="Caracara plancus" data-about="Ave de rapina adaptável, facilmente reconhecida pelo porte e pelo comportamento oportunista na busca por alimento." data-image="carcara.jpg"><span class="species-photo"><img src="carcara.jpg" alt="Carcará"><i>AVE</i><b>↗</b></span><span class="species-info"><small>07 / AVES</small><strong>Carcará</strong><em>Caracara plancus</em></span></button>
+    <button class="species-card reveal" data-kind="Aves" data-name="Acauã" data-scientific="Herpetotheres cachinnans" data-about="Ave conhecida por seu canto marcante. Integra as relações alimentares do ecossistema e ajuda a manter o equilíbrio natural." data-image="acaua.jpg"><span class="species-photo"><img src="acaua.jpg" alt="Acauã"><i>AVE</i><b>↗</b></span><span class="species-info"><small>08 / AVES</small><strong>Acauã</strong><em>Herpetotheres cachinnans</em></span></button>
+    <button class="species-card reveal" data-kind="Répteis" data-name="Calango" data-scientific="Tropidurus hispidus" data-about="Lagarto frequentemente observado em áreas ensolaradas e rochosas. Como outros répteis, regula sua temperatura com o ambiente." data-image="calango.jpg"><span class="species-photo"><img src="calango.jpg" alt="Calango"><i>RÉPTIL</i><b>↗</b></span><span class="species-info"><small>09 / RÉPTEIS</small><strong>Calango</strong><em>Tropidurus hispidus</em></span></button>
+  </div>
+  <div class="no-results" id="noResults" hidden>Nenhuma espécie encontrada com essa busca.</div>
+  <div class="section-note"><span>✳</span> Esta seleção é uma amostra visual. Consulte o aplicativo para explorar seu catálogo e suas informações.</div>
+</section>
+
+<section class="memory-section" id="jogo">
+ <div class="section-wrap memory-inner">
+  <div class="section-heading reveal"><div><div class="eyebrow dark-eyebrow">JOGO / DESAFIO DA CAATINGA</div><h2>Encontre os pares.<br><em>Descubra o bioma.</em></h2></div><p>Vire duas cartas por vez e encontre os pares de espécies da Caatinga. Ao terminar a rodada, embaralhe para jogar novamente.</p></div>
+  <div class="memory-panel reveal">
+   <div class="memory-toolbar">
+    <div class="memory-stats" aria-label="Estatísticas da rodada">
+     <div><small>JOGADAS</small><strong id="memoryMoves">0</strong></div>
+     <div><small>PARES</small><strong id="memoryPairs">0 / 8</strong></div>
+     <div><small>TEMPO</small><strong id="memoryTime">00:00</strong></div>
+    </div>
+    <button class="memory-shuffle" id="memoryShuffle" type="button"><span aria-hidden="true">⤨</span> Embaralhar cartas</button>
+   </div>
+   <p class="memory-status" id="memoryStatus" aria-live="polite">Encontre os 8 pares para completar a rodada.</p>
+   <div class="memory-grid" id="memoryGrid" role="group" aria-label="Cartas do jogo da memória"></div>
+  </div>
+  <div class="snake-panel snake-io-panel reveal" aria-labelledby="snakeTitle">
+   <div class="snake-heading"><div><div class="eyebrow dark-eyebrow">ARENA OFFLINE · COBRAS COM IA</div><h3 id="snakeTitle">Cobra da Caatinga</h3><p>Explore a arena, colete frutos e dispute o topo contra 10 cobras controladas pelo computador — sem internet e sem servidores.</p></div><div class="snake-score"><small>RECORDE LOCAL</small><strong id="ioBest">0</strong></div></div>
+   <div class="io-game-shell">
+    <div class="io-game-hud" aria-label="Estatísticas da partida">
+     <div><small>JOGADOR</small><strong id="ioPlayerLabel">Explorador</strong></div>
+     <div><small>PONTOS</small><strong id="ioScore">0</strong></div>
+     <div><small>TAMANHO</small><strong id="ioLength">12</strong></div>
+     <div><small>RIVAIS VIVOS</small><strong id="ioAlive">10</strong></div>
+     <div><small>POSIÇÃO</small><strong id="ioRank">—</strong></div>
+    </div>
+    <div class="io-arena-wrap">
+     <canvas class="snake-board io-arena" id="ioBoard" width="960" height="600" tabindex="0" aria-label="Arena da Cobrinha da Caatinga. Mire com o mouse, use as setas ou W, A, S, D; no celular, arraste ou use os controles.">Seu navegador não suporta a arena do jogo.</canvas>
+     <div class="io-overlay" id="ioStartOverlay">
+      <div class="io-dialog"><span class="io-dialog-mark" aria-hidden="true">✳</span><p class="eyebrow dark-eyebrow">UMA AVENTURA SEM INTERNET</p><h4>Entre na arena</h4><p>Coma frutos, cresça e supere as cobras da Caatinga. Encoste o mouse na direção desejada; no celular, arraste na tela.</p>
+       <label class="io-field">Seu nome<input id="ioPlayerName" maxlength="18" value="Explorador" autocomplete="nickname"></label>
+       <label class="io-field">Dificuldade<select id="ioDifficulty"><option value="easy">Fácil</option><option value="medium" selected>Média</option><option value="hard">Difícil</option></select></label>
+       <div class="snake-skin-picker" role="group" aria-label="Escolha a aparência da cobra">
+        <span>ESCOLHA SUA COBRA</span>
+        <div><button class="snake-skin-option is-selected" type="button" data-io-skin="rattlesnake" aria-pressed="true"><i class="snake-skin-preview rattlesnake-preview" aria-hidden="true"></i><span>Cascavel</span></button><button class="snake-skin-option" type="button" data-io-skin="boa" aria-pressed="false"><i class="snake-skin-preview boa-preview" aria-hidden="true"></i><span>Jiboia</span></button><button class="snake-skin-option" type="button" data-io-skin="coral" aria-pressed="false"><i class="snake-skin-preview coral-preview" aria-hidden="true"></i><span>Coral</span></button></div>
+       </div>
+       <button class="memory-shuffle io-primary" id="ioPlay" type="button">JOGAR</button>
+      </div>
+     </div>
+     <div class="io-overlay" id="ioPauseOverlay" hidden><div class="io-dialog io-dialog-compact"><p class="eyebrow dark-eyebrow">PAUSA</p><h4>Respire um pouco</h4><p>Sua partida está pausada.</p><button class="memory-shuffle io-primary" id="ioResume" type="button">CONTINUAR</button></div></div>
+     <div class="io-overlay" id="ioOverOverlay" hidden><div class="io-dialog io-dialog-compact"><p class="eyebrow dark-eyebrow">FIM DE JOGO</p><h4 id="ioOverTitle">Boa partida!</h4><p id="ioFinalScore">Pontuação: 0</p><button class="memory-shuffle io-primary" id="ioPlayAgain" type="button">JOGAR NOVAMENTE</button></div></div>
+    </div>
+    <div class="snake-controls io-toolbar"><p class="snake-status" id="ioStatus" role="status" aria-live="polite">Pronto para jogar. A partida começa quando você selecionar JOGAR.</p><div class="snake-actions"><button class="snake-action-secondary" id="ioPause" type="button" disabled>Pausar</button><button class="snake-action-secondary" id="ioRestart" type="button">Nova partida</button></div><div class="snake-pad" role="group" aria-label="Controles direcionais"><button type="button" data-io-direction="up" aria-label="Direcionar para cima">↑</button><button type="button" data-io-direction="left" aria-label="Direcionar para a esquerda">←</button><button type="button" data-io-direction="down" aria-label="Direcionar para baixo">↓</button><button type="button" data-io-direction="right" aria-label="Direcionar para a direita">→</button></div></div>
+    <div class="io-lower">
+     <div class="io-leaderboard"><h4>Ranking da partida <span>ATUALIZAÇÃO AO VIVO</span></h4><ol id="ioRanking" aria-live="polite"></ol></div>
+     <div class="io-legend"><strong>COMO JOGAR</strong><p><b>Mouse:</b> a cobra vira suavemente na direção do cursor.</p><p><b>Teclado:</b> setas ou W, A, S, D. <b>Celular:</b> arraste na arena ou toque nas setas.</p><p>Colete frutos; evite as bordas e os corpos. Cobras eliminadas deixam alimento.</p></div>
+    </div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section class="learning-section">
+ <div class="section-wrap learning-inner">
+  <div class="learning-art reveal"><img src="mod-biodiversidade.jpg" alt="Biodiversidade e vida na Caatinga"><div class="learning-orbit orbit-a"></div><div class="learning-orbit orbit-b"></div><div class="learning-tag">APRENDER TAMBÉM É EXPLORAR</div><div class="learning-quote">Curiosidade<br>é o começo<br>da descoberta<span>✳</span></div></div>
+  <div class="learning-copy reveal"><div class="eyebrow dark-eyebrow">04 / APRENDER FAZ PARTE DA JORNADA</div><h2>Conhecimento que<br><em>fica com você.</em></h2><p>Além de explorar espécies, o aplicativo reúne conteúdos educativos para ampliar o entendimento sobre o bioma e seus seres vivos.</p>
+   <div class="learning-step"><span>01</span><div><b>Estude em módulos</b><p>Avance por conteúdos organizados em lições sobre a Caatinga, biodiversidade, adaptações e conservação.</p></div></div>
+   <div class="learning-step"><span>02</span><div><b>Teste o que aprendeu</b><p>Responda aos quizzes e use as perguntas como oportunidade para revisar e fixar conhecimentos.</p></div></div>
+   <div class="learning-step"><span>03</span><div><b>Acompanhe seu progresso</b><p>Consulte seu avanço nas atividades disponíveis e retome sua experiência de aprendizagem.</p></div></div>
+   <div class="learning-footnote">Os conteúdos e indicadores apresentados dependem dos recursos disponíveis na versão instalada.</div>
+  </div>
+ </div>
+</section>
+
+<section class="demo-section section-wrap" id="demonstracao">
+ <div class="demo-header reveal"><div><div class="eyebrow dark-eyebrow">05 / VEJA NA PRÁTICA</div><h2>Um passeio pela<br><em>Caatinga digital.</em></h2></div><p>Uma demonstração em vídeo pode mostrar os caminhos, os detalhes e a experiência real de uso do aplicativo.</p></div>
+ <div class="demo-player reveal" id="demoPlayer">
+  <video class="demo-video" controls playsinline preload="metadata" poster="mod-intro.jpg">
+    <source src="discovery.mp4" type="video/mp4">
+    Seu navegador não conseguiu reproduzir este vídeo.
+  </video>
+  <div class="demo-instructions"><span class="instruction-icon">✓</span><p><b>Demonstração do aplicativo</b><br>Vídeo local do app Discovery Caatinga Go.</p></div>
+ </div>
+</section>
+
+<section class="development-section" id="desenvolvimento">
+ <div class="section-wrap">
+  <div class="section-heading light-heading reveal"><div><div class="eyebrow">06 / POR TRÁS DA EXPERIÊNCIA</div><h2>Ideia, código<br><em>e propósito.</em></h2></div><p>O aplicativo foi estruturado como um projeto Android. Veja uma visão geral de sua construção e dos elementos que dão vida à experiência.</p></div>
+  <div class="dev-grid">
+   <article class="dev-card dev-main reveal"><div class="dev-card-top"><span>01 / A APLICAÇÃO</span><span class="dev-symbol">⌘</span></div><figure class="dev-photo-frame"><img class="dev-photo" src="mod-intro.jpg" alt="Paisagem real da Caatinga com cactos e vegetação nativa" width="1000" height="667" loading="lazy" decoding="async"><figcaption>O bioma que inspira o aplicativo</figcaption></figure><h3>Aplicativo Android</h3><p>O projeto enviado contém código Java, interfaces XML e recursos visuais para construir as telas e a navegação do aplicativo.</p></article>
+   <article class="dev-card reveal"><div class="dev-card-top"><span>02 / INTERFACE</span><span class="dev-symbol">▧</span></div><figure class="dev-photo-frame"><img class="dev-photo" src="carcara.jpg" alt="Carcará, ave nativa da Caatinga" width="547" height="365" loading="lazy" decoding="async"><figcaption>Espécies em destaque</figcaption></figure><h3>Telas e componentes</h3><p>Layouts e componentes organizam as informações, os cartões de espécies, as áreas de aprendizagem e os controles de navegação.</p></article>
+   <article class="dev-card reveal"><div class="dev-card-top"><span>03 / EXPERIÊNCIA</span><span class="dev-symbol">✳</span></div><figure class="dev-photo-frame"><img class="dev-photo" src="mandacaru.webp" alt="Mandacaru em flor no seu ambiente natural" width="888" height="500" loading="lazy" decoding="async"><figcaption>Descobertas da flora local</figcaption></figure><h3>Uma jornada conectada</h3><p>Os recursos se complementam: pesquisar, conhecer detalhes, guardar favoritos e avançar pelos conteúdos educativos.</p></article>
+  </div>
+  <div class="tech-note reveal"><div><span class="eyebrow">TECNOLOGIAS IDENTIFICADAS NO PROJETO</span><h3>Construído com ferramentas Android</h3><p>Na versão analisada, o aplicativo utiliza Java e layouts XML, com componentes AndroidX e Material. A configuração inclui recursos para interface e persistência local. A composição exata pode variar conforme a versão do código.</p></div><div class="tech-pills"><span>Java</span><span>XML</span><span>Android</span><span>AndroidX</span><span>Material Components</span><span>SharedPreferences</span></div></div>
+  <div class="architecture reveal"><div><span class="eyebrow">VISÃO SIMPLIFICADA</span><h3>Como as partes se conectam</h3></div><div class="architecture-flow"><div><small>01</small><b>Interface</b><span>Telas e navegação</span></div><i>→</i><div><small>02</small><b>Regras do app</b><span>Recursos e conteúdo</span></div><i>→</i><div><small>03</small><b>Dados</b><span>Preferências e progresso</span></div></div><p>Representação conceitual para facilitar a compreensão, não um diagrama completo de arquitetura interna.</p></div>
+ </div>
+</section>
+
+<section class="team-section section-wrap" id="equipe">
+ <div class="section-heading reveal"><div><div class="eyebrow dark-eyebrow">07 / QUEM FAZ A DESCOBERTA ACONTECER</div><h2>Feito com curiosidade.<br><em>Compartilhado com você.</em></h2></div><p>O Discovery Caatinga Go é um projeto desenvolvido por estudantes, unindo tecnologia, criatividade e interesse pela natureza.</p></div>
+ <div class="team-grid reveal">
+  <article class="team-card"><img class="team-avatar team-photo" src="pedro-amorim.jpeg" alt="Pedro Amorim"><div class="team-content"><small>DESENVOLVEDOR</small><h3>Pedro Amorim</h3><p>Desenvolvedor do Discovery Caatinga Go, projeto educativo sobre a biodiversidade e a conservação do bioma Caatinga.</p><a class="team-social" href="https://www.instagram.com/pdro.mdrs/" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Pedro Amorim">@pdro.mdrs <span>↗</span></a><div class="team-bottom"><span>DISCOVERY CAATINGA GO</span><span>01 / 03</span></div></div></article>
+  <article class="team-card"><img class="team-avatar team-photo" src="kaike-medeiros.jpeg" alt="Kaike Medeiros"><div class="team-content"><small>DESENVOLVEDOR</small><h3>Kaike Medeiros</h3><p>Desenvolvedor do Discovery Caatinga Go, projeto educativo sobre a biodiversidade e a conservação do bioma Caatinga.</p><a class="team-social" href="https://www.instagram.com/kaike_mdrs/" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Kaike Medeiros">@kaike_mdrs <span>↗</span></a><div class="team-bottom"><span>DISCOVERY CAATINGA GO</span><span>02 / 03</span></div></div></article>
+  <article class="team-card"><img class="team-avatar team-photo" src="alexandre-costa.jpeg" alt="Alexandre Costa"><div class="team-content"><small>PROFESSOR ORIENTADOR</small><h3>Alexandre Costa</h3><p>Orientador do projeto, desenvolvido no contexto da disciplina de Tópicos Especiais em Informática.</p><a class="team-social" href="https://www.instagram.com/alexandrecostapb/" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Alexandre Costa">@alexandrecostapb <span>↗</span></a><div class="team-bottom"><span>DISCOVERY CAATINGA GO</span><span>03 / 03</span></div></div></article>
+ </div>
+</section>
+
+<section class="faq-section">
+ <div class="section-wrap faq-layout"><div class="faq-intro reveal"><div class="eyebrow dark-eyebrow">08 / DÚVIDAS FREQUENTES</div><h2>Quer saber<br><em>mais?</em></h2><p>Algumas respostas para começar sua experiência.</p><div class="faq-aside">Ainda ficou com alguma dúvida?<span>Explore o aplicativo e descubra outros caminhos.</span></div></div>
+ <div class="faq-list reveal">
+  <details><summary>O que é o Discovery Caatinga Go?<span>+</span></summary><p>É um aplicativo educativo que apresenta espécies e conteúdos sobre a Caatinga, com recursos para explorar, aprender e testar conhecimentos.</p></details>
+  <details><summary>Para quem ele foi desenvolvido?<span>+</span></summary><p>Para estudantes, professores, pesquisadores e qualquer pessoa interessada em conhecer a biodiversidade e a conservação da Caatinga.</p></details>
+  <details><summary>Como encontro uma espécie?<span>+</span></summary><p>Na área de espécies, utilize as categorias e a busca disponíveis para localizar o conteúdo desejado. Os nomes e opções podem variar conforme a versão do aplicativo.</p></details>
+  <details><summary>Como funcionam as atividades educativas?<span>+</span></summary><p>O aplicativo reúne módulos, lições e quizzes. Explore a área de aprendizagem para consultar os conteúdos e responder às atividades disponíveis.</p></details>
+  <details><summary>O aplicativo precisa de internet?<span>+</span></summary><p>Alguns conteúdos locais podem funcionar sem conexão. O funcionamento exato depende da versão instalada.</p></details>
+  <details><summary>Onde posso baixar o aplicativo?</summary><p>Baixe o APK de testes na seção de download deste site. A instalação é destinada a dispositivos Android.</p></details>
+ </div></div>
+</section>
+
+<section class="download-section section-wrap reveal" id="download-app" aria-labelledby="downloadTitle">
+ <div class="download-copy">
+  <div class="eyebrow">DISCOVERY CAATINGA GO · ANDROID</div>
+  <h2 id="downloadTitle">Leve a Caatinga<br><em>com você.</em></h2>
+  <p>Baixe o aplicativo e explore espécies, conteúdos e atividades educativas no seu dispositivo Android.</p>
+  <a class="button download-button" href="discovery-caatinga-go.apk" download="discovery-caatinga-go.apk"><span class="download-icon" aria-hidden="true">↓</span> Baixar aplicativo <span aria-hidden="true">↗</span></a>
+  <small class="download-note">APK de testes · Aproximadamente 14 MB · Android</small>
+ </div>
+ <div class="download-card" aria-label="Informações sobre o arquivo do aplicativo">
+  <span class="download-card-icon" aria-hidden="true">◈</span>
+  <div><small>ARQUIVO PARA INSTALAÇÃO</small><strong>Discovery Caatinga Go</strong><span>Aplicativo Android · APK</span></div>
+  <span class="download-file-size">14 MB</span>
+ </div>
+</section>
+
+<section class="closing-cta section-wrap reveal"><div class="closing-ornament">✳</div><div class="eyebrow">A CAATINGA TEM MUITO A REVELAR</div><h2>Sua próxima descoberta<br><em>começa agora.</em></h2><p>Conheça, valorize e preserve a riqueza de um bioma que faz parte da nossa história.</p><a class="button button-light" href="#inicio">Voltar ao início <span>↑</span></a><div class="closing-line">DISCOVERY CAATINGA GO <span>—</span> CONHEÇA · VALORIZE · PRESERVE</div></section>
+</main>
+
+<footer class="site-footer"><div class="footer-main"><a class="brand footer-brand" href="#inicio"><img src="logo.png" alt=""><span>DISCOVERY <b>CAATINGA GO</b></span></a><p>Conheça, valorize e preserve a Caatinga.<br>Uma experiência educativa conectada à natureza.</p><div class="footer-links"><a href="#sobre">O projeto</a><a href="#experiencia">Funcionalidades</a><a href="#especies">Biodiversidade</a><a href="#descoberta-do-dia">Descoberta do dia</a><a href="#jogo">Jogo da memória</a><a href="#desenvolvimento">Desenvolvimento</a><a href="#equipe">Equipe</a><a href="#download-app">Baixar aplicativo</a></div></div><div class="footer-bottom"><span>© <span id="year"></span> DISCOVERY CAATINGA GO</span><span>Projeto educativo • Conteúdo para fins de aprendizagem</span><a href="#top">Voltar ao topo ↑</a></div></footer>
+
+<div class="modal" id="speciesModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal-backdrop" data-close></div><div class="modal-panel"><button class="modal-close" data-close aria-label="Fechar">×</button><img id="modalImage" src="" alt=""><div class="modal-body"><span class="eyebrow dark-eyebrow" id="modalKind">ESPÉCIE</span><h2 id="modalTitle"></h2><em id="modalScientific"></em><p id="modalAbout"></p><div class="modal-disclaimer">Conteúdo introdutório. Consulte fontes especializadas para aprofundar a pesquisa.</div></div></div></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="script.js"></script>
+<script src="snake-io.js"></script>
+<script>
+if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost" || location.hostname === "127.0.0.1")) {
+  addEventListener("DOMContentLoaded", () => navigator.serviceWorker.register("service-worker.js").catch(error => console.error("Não foi possível ativar o modo offline:", error)));
+}
+</script>
+</body></html>
